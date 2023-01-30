@@ -1,0 +1,5 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/file_list_adapter_more_menu_open"
+		android:title="Open"/>
+</menu>
