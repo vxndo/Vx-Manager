@@ -5,7 +5,8 @@ import android.content.*;
 import java.io.*;
 import vxndo.manager.activity.*;
 
-public class App extends Application {
+public class App
+extends Application {
 
 	private Thread.UncaughtExceptionHandler uncaughtExceptionHandler;
 
@@ -28,6 +29,7 @@ public class App extends Application {
 		});
 		super.onCreate();
 	}
+
 	private String getStackTrace(Throwable th){
 		final Writer result = new StringWriter();
 		final PrintWriter printWriter = new PrintWriter(result);

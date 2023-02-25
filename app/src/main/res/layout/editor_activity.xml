@@ -5,10 +5,10 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<GridView
-		android:id="@+id/main_fragment_gridview"
+	<vxndo.widget.CodeEditor
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"/>
+		android:layout_height="match_parent"
+		android:id="@+id/editor_activity_codeeditor"/>
 
 </LinearLayout>
 

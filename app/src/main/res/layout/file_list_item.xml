@@ -4,43 +4,40 @@
 	android:orientation="horizontal"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
 	android:background="?android:selectableItemBackground"
-	android:gravity="center"
 	android:padding="10dp">
 
 	<ImageView
 		android:layout_width="38dp"
 		android:layout_height="38dp"
-		android:id="@+id/file_list_adapter_item_icon"/>
+		android:id="@+id/file_list_item_icon"/>
 
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_weight="1.0"
-		android:layout_marginStart="10dp"
-		android:layout_marginEnd="10dp">
+		android:layout_weight="1"
+		android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp">
 
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:id="@+id/file_list_adapter_item_title"/>
+			android:id="@+id/file_list_item_title"/>
 
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:id="@+id/file_list_adapter_item_info"/>
+			android:id="@+id/file_list_item_subtitle"/>
 
 	</LinearLayout>
 
-	<ImageView
-		android:background="?android:selectableItemBackgroundBorderless"
-		android:src="@drawable/ic_more"
-		android:scaleType="centerInside"
-		android:layout_width="38dp"
-		android:layout_height="38dp"
-		android:id="@+id/file_list_adapter_item_more"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/file_list_item_info"/>
 
 </LinearLayout>
 
