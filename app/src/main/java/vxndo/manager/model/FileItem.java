@@ -4,6 +4,7 @@ import android.content.*;
 import android.graphics.drawable.*;
 import java.io.*;
 import vxndo.manager.model.internal.*;
+import java.util.*;
 
 public class FileItem
 extends FileItemInternal {

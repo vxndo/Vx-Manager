@@ -5,7 +5,13 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<vxndo.widget.CodeEditor
+	<Toolbar
+		android:layout_width="match_parent"
+		android:layout_height="?android:actionBarSize"
+		android:id="@+id/editor_activity_toolbar"
+		style="?android:actionBarStyle"/>
+
+	<vxndo.manager.widget.CodeEditor
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:id="@+id/editor_activity_codeeditor"/>

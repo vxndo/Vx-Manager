@@ -8,7 +8,7 @@
 	<Toolbar
 		android:layout_width="match_parent"
 		android:layout_height="?android:actionBarSize"
-		android:id="@+id/main_activity_toolbar"
+		android:id="@+id/file_list_fragment_toolbar"
 		style="?android:actionBarStyle">
 		
 		<LinearLayout
@@ -21,14 +21,14 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textSize="17dp"
-				android:id="@+id/main_activity_toolbar_name"
+				android:id="@+id/file_list_fragment_toolbar_name"
 				android:singleLine="true"
 				android:ellipsize="middle"/>
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:id="@+id/main_activity_toolbar_path"
+				android:id="@+id/file_list_fragment_toolbar_path"
 				android:ellipsize="middle"
 				android:singleLine="true"/>
 
@@ -37,7 +37,7 @@
 	</Toolbar>
 
 	<GridView
-		android:id="@+id/main_activity_gridview"
+		android:id="@+id/file_list_fragment_gridview"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
 

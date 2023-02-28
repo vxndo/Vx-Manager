@@ -25,6 +25,7 @@ public class FileItemInternal {
 		Intent i = new Intent(Intent.ACTION_VIEW);
 		Uri uri = FileProvider.getUriForFile(context, "vxndo.manager.fileprovider", file);
 		i.setDataAndType(uri, getMimeType());
+		i.putExtra(Intent.EXTRA_STREAM, uri);
 		i.setFlags(1|2);
 		return i;
 	}

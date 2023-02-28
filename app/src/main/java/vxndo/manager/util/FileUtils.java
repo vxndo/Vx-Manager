@@ -1,6 +1,7 @@
 package vxndo.manager.util;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class FileUtils {
@@ -70,6 +71,25 @@ public class FileUtils {
 				dirs.add(file);
 			}
 		} return dirs;
+	}
+
+	public static String read(File file) throws Exception {
+		return new String(readAllBytes(file));
+	}
+
+	public static byte[] readAllBytes(File file) throws Exception {
+		return Files.readAllBytes(file.toPath()); 
+	}
+
+	public static boolean write(File file, String content) {
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(content);
+			writer.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public static Comparator<File> FILE_NAME_COMPARATOR = new Comparator<File>() {

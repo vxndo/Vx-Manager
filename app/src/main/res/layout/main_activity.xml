@@ -5,13 +5,14 @@
 	android:layout_height="match_parent"
 	android:id="@+id/main_activiy_drawerlayout">
 
-	<include
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		layout="@layout/main_activity_content"/>
+		android:id="@+id/main_activity_framelayout"/>
 
 	<LinearLayout
 		android:orientation="vertical"
+		android:clickable="true"
 		android:background="?android:colorPrimary"
 		android:layout_width="270dp"
 		android:layout_height="match_parent"
