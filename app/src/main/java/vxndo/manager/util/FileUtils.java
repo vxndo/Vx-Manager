@@ -92,6 +92,16 @@ public class FileUtils {
 		}
 	}
 
+	public static void bufferedCopy(InputStream in, File out) throws Exception {
+		OutputStream os = new FileOutputStream(out);
+		byte[] buffer = new byte[8192];
+		int length;
+		while ((length = in.read(buffer)) > 0) {
+			os.write(buffer, 0, length);
+		} in.close();
+		os.close();
+	}
+
 	public static Comparator<File> FILE_NAME_COMPARATOR = new Comparator<File>() {
 		@Override
 		public int compare(File p1, File p2) {

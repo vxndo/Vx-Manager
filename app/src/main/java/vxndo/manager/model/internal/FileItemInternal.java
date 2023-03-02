@@ -10,6 +10,9 @@ import java.text.*;
 import java.util.*;
 import vxndo.manager.*;
 import vxndo.manager.content.*;
+import jp.tomorrowkey.android.gifplayer.*;
+import java.nio.file.*;
+import android.graphics.*;
 
 public class FileItemInternal {
 
@@ -82,7 +85,16 @@ public class FileItemInternal {
 					return context.getDrawable(R.drawable.ic_file);
 				}
 			} else {
-				return context.getDrawable(R.drawable.ic_file);
+				Drawable drawable = context.getDrawable(R.drawable.ic_file);
+				String[] ss = {".png",".jpg",".jpeg",".gif", ".webp"};
+				for (String s: ss) {
+					if (file.getName().endsWith(s)) {
+						try {
+							BaseGifImage img = new BaseGifImage(Files.readAllBytes(file.toPath()));
+							drawable = new BaseGifDrawable(img, Bitmap.Config.ARGB_8888);
+						} catch (Exception e) {}
+					}
+				} return drawable;
 			}
 		}
 	}

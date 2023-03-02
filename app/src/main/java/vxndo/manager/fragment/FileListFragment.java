@@ -16,6 +16,7 @@ import vxndo.manager.util.*;
 import vxndo.manager.widget.*;
 
 import vxndo.manager.util.FileUtils;
+//import org.chromium.third_party.android.swiperefresh.SwipeRefreshLayout;
 
 public class FileListFragment
 extends Fragment
@@ -23,14 +24,15 @@ implements MainActivity.IOnBackPressed,
 GridView.OnItemClickListener,
 GridView.OnItemLongClickListener {
 
+	//private SwipeRefreshLayout swipeRefresh;
 	private Toolbar toolbar;
 	private GridView gridView;
 	private FileListAdapter adapter;
 	private ArrayList<FileItem> items = new ArrayList<>();
 	private File storage = Environment.getExternalStorageDirectory();
-	private File path;
+	private File path = storage;
 	private TextView toolbarName, toolbarPath;
-	private Activity context;
+	private MainActivity context;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ GridView.OnItemLongClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		//swipeRefresh = view.findViewById(R.id.file_list_fragment_swiperefresh);
 		toolbar = view.findViewById(R.id.file_list_fragment_toolbar);
 		toolbarName = view.findViewById(R.id.file_list_fragment_toolbar_name);
 		toolbarPath = view.findViewById(R.id.file_list_fragment_toolbar_path);
@@ -49,13 +52,28 @@ GridView.OnItemLongClickListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		context = getActivity();
+		context = (MainActivity) getActivity();
+		context.setOnRequestPermissionResult(new MainActivity.IOnPermissionResult() {
+			@Override
+			public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+				if (grantResults[0] == 0) {
+					init();
+				}
+			}
+		});
 		setupActionBar();
+		/*swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				list(path);
+				swipeRefresh.setRefreshing(false);
+			}
+		});*/
 		if (Build.VERSION.SDK_INT >= 23) {
 			String[] perms = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
 			perms = PermissionUtils.checkNotGranted(context, perms);
 			if (perms != null && perms.length > 0) {
-				requestPermissions(perms, 0);
+				context.requestPermissions(perms, 0);
 			} else init();
 		} else init();
 	}
@@ -121,7 +139,13 @@ GridView.OnItemLongClickListener {
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4) {
-		return true;
+		FileItem item = items.get(p3);
+		File file = item.getFile();
+		if (file.getName().endsWith(".jar")) {
+			LibUtil.decompile(context, file.getPath());
+		} else if (file.getName().endsWith(".apk")) {
+			LibUtil.signApk(context, file);
+		} return true;
 	}
 
 	public void setPath(View v) {
@@ -154,11 +178,11 @@ GridView.OnItemLongClickListener {
 				}
 			});
 		et.setOnSubmitListener(new TextEditor.OnSubmitListener() {
-				@Override
-				public void onSubmit() {
-					dialog.getButton(-1).performClick();
-				}
-			});
+			@Override
+			public void onSubmit() {
+				dialog.getButton(-1).performClick();
+			}
+		});
 	}
 
 	@Override

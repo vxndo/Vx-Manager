@@ -19,6 +19,7 @@ extends Activity {
 
 	private DrawerLayout drawer;
 	private Fragment fragment;
+	private IOnPermissionResult onPermissionResult;
 	private Fragment[] containers = {
 		new FileListFragment(),
 		new MusicPlayerFragment()
@@ -32,9 +33,11 @@ extends Activity {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().build());
 		drawer = findViewById(R.id.main_activiy_drawerlayout);
 		replace(0);
-		String jarPath = "/sdcard/Download/test.jar";
-		String cfrUrl = "https://github.com/Vxndo7z/Files/blob/main/VxManager/cfr.dex";
 		//CfrUtil.decompile(this, jarPath);
+	}
+
+	public void setOnRequestPermissionResult(IOnPermissionResult listener) {
+		onPermissionResult = listener;
 	}
 
 	private void replace(int pos) {
@@ -69,7 +72,19 @@ extends Activity {
 		}
 	}
 
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (onPermissionResult != null) {
+			onPermissionResult.onRequestPermissionResult(requestCode, permissions, grantResults);
+		}
+	}
+
 	public static interface IOnBackPressed {
-		boolean onBackPressed();
+		boolean onBackPressed()
+	}
+
+	public static interface IOnPermissionResult {
+		void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults)
 	}
 }
